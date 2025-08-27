@@ -144,10 +144,20 @@ static const char *menucmd[] = { "wmenu-run", NULL };
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
+	{ MODKEY,                    XKB_KEY_q,          focusto,        {.i = 0} },
+	{ MODKEY,                    XKB_KEY_w,          focusto,        {.i = 1} },
+	{ MODKEY,                    XKB_KEY_e,          focusto,        {.i = 2} },
+	{ MODKEY,                    XKB_KEY_r,          focusto,        {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          swapstack,      {.i = 0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_W,          swapstack,      {.i = 1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,          swapstack,      {.i = 2} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          swapstack,      {.i = -1} },
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          relativeswap,   {.i = +1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          relativeswap,   {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_Left,       shiftview,      {.i = -1 } },
