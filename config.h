@@ -19,7 +19,7 @@ static const float bordercolor[]           = COLOR(0x444444ff);
 static const float focuscolor[]            = COLOR(0x005577ff);
 static const float urgentcolor[]           = COLOR(0xff0000ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
-static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 0.0f}; /* You can also use glsl colors */
+static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
 
 /* tagging - TAGCOUNT must be no greater than 31 */
 #define TAGCOUNT (9)
@@ -59,10 +59,11 @@ static const ForceTearingRule force_tearing[] = {
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
+	{ "||",       col },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL }, /* terminate */
 };
 
@@ -165,7 +166,7 @@ static const Key keys[] = {
 	//{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          swapstack,      {.i = -1} },
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
-	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
+	//{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          relativeswap,   {.i = +1} },
@@ -197,12 +198,14 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
-	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                    XKB_KEY_u,          setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                    XKB_KEY_o,          setlayout,      {.v = &layouts[4]} },
-	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT,  XKB_KEY_N,          setlayout,      {.v = &layouts[0]} }, // default layout ONE
+	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} }, // default layout
+	{ MODKEY,                    XKB_KEY_y,          setlayout,      {.v = &layouts[1]} }, // monocle
+	{ MODKEY,                    XKB_KEY_u,          setlayout,      {.v = &layouts[5]} }, // floating layout
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_I,          setlayout,      {.v = &layouts[2]} }, // bstack
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_O,          setlayout,      {.v = &layouts[3]} }, //bstack hositz
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_P,          setlayout,      {.v = &layouts[4]} }, // col
+	//{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} }, // because its occupied by langswitch
 	{ MODKEY,                    XKB_KEY_n,          nextlayout,    {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
 	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
