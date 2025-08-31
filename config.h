@@ -209,11 +209,12 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
-	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                    XKB_KEY_u,          setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                    XKB_KEY_o,          setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT  XKB_KEY_n,          setlayout,      {.v = &layouts[0]} }, // default layout
+	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} }, // default layout
+	{ MODKEY,                    XKB_KEY_y,          setlayout,      {.v = &layouts[1]} }, // monocle
+	{ MODKEY,                    XKB_KEY_i,          setlayout,      {.v = &layouts[2]} }, // bstack
+	{ MODKEY,                    XKB_KEY_o,          setlayout,      {.v = &layouts[3]} }, //bstack hositz
+	{ MODKEY,                    XKB_KEY_p,          setlayout,      {.v = &layouts[4]} }, // col
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY,                    XKB_KEY_n,          nextlayout,    {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
