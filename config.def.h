@@ -63,6 +63,7 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
+	{ "||",       col },
 	{ NULL,       NULL }, /* terminate */
 };
 
@@ -201,6 +202,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_u,          setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                    XKB_KEY_o,          setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                    XKB_KEY_c,          setlayout,      {.v = &layouts[5]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY,                    XKB_KEY_n,          nextlayout,    {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
