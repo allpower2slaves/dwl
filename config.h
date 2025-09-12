@@ -203,9 +203,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} }, // default layout
 	{ MODKEY,                    XKB_KEY_y,          setlayout,      {.v = &layouts[1]} }, // monocle
 	{ MODKEY,                    XKB_KEY_u,          setlayout,      {.v = &layouts[5]} }, // floating layout
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_I,          setlayout,      {.v = &layouts[2]} }, // bstack
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_O,          setlayout,      {.v = &layouts[3]} }, //bstack hositz
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_P,          setlayout,      {.v = &layouts[4]} }, // col
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_T,          setlayout,      {.v = &layouts[2]} }, // bstack
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Y,          setlayout,      {.v = &layouts[3]} }, //bstack hositz
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_U,          setlayout,      {.v = &layouts[4]} }, // col
 	//{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} }, // because its occupied by langswitch
 	{ MODKEY,                    XKB_KEY_n,          nextlayout,    {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
@@ -218,9 +218,10 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_H,          setcfact,       {.f = +0.25f} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_L,          setcfact,       {.f = -0.25f} },
+	{ MODKEY, XKB_KEY_BackSpace, spawn, SHCMD("wl-lock") },
 	{ 0, XKB_KEY_Print, spawn, SHCMD("wl-screenshot -a") },
 	{ WLR_MODIFIER_SHIFT, XKB_KEY_Print, spawn, SHCMD("wl-screenshot -f") },
-	{ MODKEY,	 XKB_KEY_d,				spawn, SHCMD("fuzzel")},
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_P, spawn, SHCMD("fuzzel")},
 	//{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          setcfact,       {.f = 0.0f} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
