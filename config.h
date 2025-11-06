@@ -14,6 +14,9 @@ static const unsigned int gappih           = 10; /* horiz inner gap between wind
 static const unsigned int gappiv           = 10; /* vert inner gap between windows */
 static const unsigned int gappoh           = 10; /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov           = 10; /* vert outer gap between windows and screen edge */
+static const unsigned int stairpx          = 60; /* depth of the stairs layout */
+static const int stairdirection            = 0;  /* 0: left-aligned, 1: right-aligned */
+static const int stairsamesize             = 1;  /* 1 means shrink all the staired windows to the same size */
 static const float rootcolor[]             = COLOR(0x222222ff);
 static const float bordercolor[]           = COLOR(0x444444ff);
 static const float focuscolor[]            = COLOR(0x00ff7fff);
@@ -63,6 +66,7 @@ static const Layout layouts[] = {
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "||",       col },
+	{ "[S]",      stairs },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL }, /* terminate */
 };
@@ -202,9 +206,9 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT,  Key_n,          setlayout,      {.v = &layouts[0]} }, // default layout ONE
 	{ MODKEY,                    Key_t,          setlayout,      {.v = &layouts[0]} }, // default layout
 	{ MODKEY,                    Key_y,          setlayout,      {.v = &layouts[1]} }, // monocle
-	{ MODKEY,                    Key_u,          setlayout,      {.v = &layouts[5]} }, // floating layout
+	{ MODKEY,                    Key_u,          setlayout,      {.v = &layouts[6]} }, // floating layout
 	{ MODKEY|WLR_MODIFIER_SHIFT, Key_t,          setlayout,      {.v = &layouts[2]} }, // bstack
-	{ MODKEY|WLR_MODIFIER_SHIFT, Key_y,          setlayout,      {.v = &layouts[3]} }, //bstack hositz
+	{ MODKEY|WLR_MODIFIER_SHIFT, Key_y,          setlayout,      {.v = &layouts[5]} }, // stairs
 	{ MODKEY|WLR_MODIFIER_SHIFT, Key_u,          setlayout,      {.v = &layouts[4]} }, // col
 	//{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} }, // because its occupied by langswitch
 	{ MODKEY,                    Key_n,          nextlayout,    {0} },
