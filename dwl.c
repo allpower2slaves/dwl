@@ -376,6 +376,7 @@ static void setup(void);
 static void shiftview(const Arg *arg);
 static void shifttag(const Arg *arg);
 static void spawn(const Arg *arg);
+static void stairs(Monitor* m);
 static void startdrag(struct wl_listener *listener, void *data);
 static void swapstack(const Arg *arg);
 static void relativeswap(const Arg *arg);
@@ -3193,6 +3194,53 @@ spawn(const Arg *arg)
 		setsid();
 		execvp(((char **)arg->v)[0], (char **)arg->v);
 		die("dwl: execvp %s failed:", ((char **)arg->v)[0]);
+	}
+}
+
+void
+stairs(Monitor *m)
+{
+	int i, n, h, mw, my;
+	int ox, oy, ow, oh;
+	Client *c;
+
+	n = 0;
+	wl_list_for_each(c, &clients, link)
+	if (VISIBLEON(c, m) && !c->isfloating && !c->isfullscreen)
+		n++;
+		if (n == 0)
+			return;
+
+	if (n > m->nmaster)
+		mw = m->nmaster ? round(m->w.width * m->mfact) : 0;
+	else
+		mw = m->w.width;
+
+	i = my = 0;
+	wl_list_for_each(c, &clients, link) {
+		if (!VISIBLEON(c,m) || c->isfloating || c->isfullscreen)
+			continue;
+		if (i < m->nmaster) {
+			h = (m->w.height - my) / (MIN(n, m->nmaster) - i);
+			resize(c, (struct wlr_box){
+			       .x=m->w.x,.y=m->w.y + my,.width=mw,.height=h
+			     }, 0);
+			my += c->geom.height;
+		} else {
+			oy = i - m->nmaster;
+			ox = stairdirection ? n - i - 1 : (stairsamesize ? i - m->nmaster: 0);
+			ow = stairsamesize ? n - m->nmaster - 1 : n - i - 1;
+			oh = stairsamesize ? ow : i - m->nmaster;
+			resize(c, (struct wlr_box){
+			       .x=m->w.x + mw + (ox * stairpx),
+			       .y=m->w.y + (oy * stairpx),
+			       .width=m->w.width - mw - (ow * stairpx),
+			       .height=m->w.height - (oh * stairpx)
+			     }, 0);
+			if (c == focustop(selmon))
+				wlr_scene_node_raise_to_top(&c->scene->node);
+		}
+		i++;
 	}
 }
 

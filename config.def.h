@@ -14,6 +14,9 @@ static const unsigned int gappih           = 10; /* horiz inner gap between wind
 static const unsigned int gappiv           = 10; /* vert inner gap between windows */
 static const unsigned int gappoh           = 10; /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov           = 10; /* vert outer gap between windows and screen edge */
+static const unsigned int stairpx          = 20; /* depth of the stairs layout */
+static const int stairdirection            = 1;  /* 0: left-aligned, 1: right-aligned */
+static const int stairsamesize             = 1;  /* 1 means shrink all the staired windows to the same size */
 static const float rootcolor[]             = COLOR(0x222222ff);
 static const float bordercolor[]           = COLOR(0x444444ff);
 static const float focuscolor[]            = COLOR(0x005577ff);
@@ -64,6 +67,7 @@ static const Layout layouts[] = {
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "||",       col },
+	{ "[S]",      stairs },
 	{ NULL,       NULL }, /* terminate */
 };
 
@@ -203,6 +207,7 @@ static const Key keys[] = {
 	{ MODKEY,                    Key_u,          setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                    Key_o,          setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                    Key_c,          setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                    XKB_KEY_s,          setlayout,      {.v = &layouts[6]} },
 	{ MODKEY,                    Key_space,      setlayout,      {0} },
 	{ MODKEY,                    Key_n,          nextlayout,    {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, Key_space,      togglefloating, {0} },
